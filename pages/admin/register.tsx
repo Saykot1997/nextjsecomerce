@@ -4,27 +4,26 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/router';
+import { MdEmail } from 'react-icons/md';
+import { RiLockPasswordFill } from 'react-icons/ri';
+import { AiFillFacebook } from 'react-icons/ai';
+import { FcGoogle } from 'react-icons/fc';
+import Link from 'next/link';
 
 function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [firstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
-    const [mobileNumber, setMobileNumber] = useState("")
     const router = useRouter()
 
     const LoginFunc = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        if (!email || !password || !firstName || !lastName || !mobileNumber) {
+        if (!email || !password) {
             toast.error('Please fill all the fields');
         } else {
 
             try {
                 const loginData = {
-                    firstName,
-                    lastName,
-                    mobileNumber,
                     email,
                     password
                 }
@@ -39,33 +38,45 @@ function Register() {
     }
 
     return (
-        <div className=' bg-gray-100 h-screen w-full flex justify-center items-center relative px-5'>
-            <div className=' w-full sm:w-[450px]'>
-                <div className=' w-full sm:w-[450px] bg-white rounded-lg py-5 shadow shadow-gray-200'>
-                    <h2 className=' text-center text-lg sm:text-2xl pt-5 font-semibold'>Admin Login</h2>
-                    <form className=' w-full py-5 px-5 sm:px-10' onSubmit={LoginFunc}>
-                        <div className=' w-full'>
-                            <label className=' text-sm sm:text-base font-medium' htmlFor="">First Name</label>
-                            <input onChange={(e) => { setFirstName(e.target.value) }} value={firstName} type="text" placeholder='First Name' required={true} className='inputFild focus:outline-none' />
+        <div className=' bg-gray-100 h-screen w-full relative px-5'>
+            <div className=' w-full pt-40 flex justify-center'>
+                <div className=' w-full sm:w-[350px] p-5 rounded-md bg-white shadow'>
+                    <h2 className=' text-lg font-semibold mb-2'>Sign Up</h2>
+                    <form className=' w-full mt-2' onSubmit={LoginFunc}>
+                        <div className=' w-full relative'>
+                            <MdEmail className=' absolute top-3 left-2 text-sm text-gray-500' />
+                            <input onChange={(e) => { setEmail(e.target.value) }} value={email} type="email" placeholder='Email' required={true} className=' w-full p-2 rounded focus:outline-none border pl-8 placeholder:text-sm placeholder:font-medium' />
                         </div>
-                        <div className=' w-full'>
-                            <label className=' text-sm sm:text-base font-medium' htmlFor="">Last Name</label>
-                            <input onChange={(e) => { setLastName(e.target.value) }} value={lastName} type="text" placeholder='Last Name' required={true} className='inputFild focus:outline-none' />
+                        <div className=' w-full relative mt-3'>
+                            <RiLockPasswordFill className=' absolute top-3 left-2 text-sm text-gray-500' />
+                            <input onChange={(e) => { setPassword(e.target.value) }} value={password} type="password" placeholder='Password' required={true} className=' w-full p-2 rounded focus:outline-none border pl-8 placeholder:text-sm placeholder:font-medium' />
                         </div>
-                        <div className=' w-full'>
-                            <label className=' text-sm sm:text-base font-medium' htmlFor="">Email</label>
-                            <input onChange={(e) => { setEmail(e.target.value) }} value={email} type="email" placeholder='Email' required={true} className='inputFild focus:outline-none' />
+                        <div className=' flex justify-between mt-3'>
+                            <p className=' text-[12px] leading-5 text-gray-500'>By signing up, you confirm that you've read and accepted our <span className=' text-blue-500 '> User Notice</span> and <span className=' text-blue-500 '>Private Policy</span></p>
                         </div>
-                        <div className=' w-full'>
-                            <label className=' text-sm sm:text-base font-medium' htmlFor="">Password</label>
-                            <input onChange={(e) => { setPassword(e.target.value) }} value={password} type="password" placeholder='Password' required={true} className='inputFild focus:outline-none' />
+                        <div className=' w-full flex justify-center mt-4'>
+                            <button type='submit' className=' w-full text-white font-semibold py-1 bg-blue-600 hover:bg-blue-700 rounded '>Sign In</button>
                         </div>
-                        <div className=' w-full'>
-                            <label className=' text-sm sm:text-base font-medium' htmlFor="">Mobile Number</label>
-                            <input onChange={(e) => { setMobileNumber(e.target.value) }} value={mobileNumber} type="number" placeholder='Mobile Number' required={true} className='inputFild focus:outline-none' />
+                        <p className=' text-sm text-center mb-2 mt-4 text-gray-500'>or Login with</p>
+                        <div className=' flex items-center gap-2 mt-4'>
+                            <div className=' flex flex-1 items-center rounded border p-1 cursor-pointer'>
+                                <AiFillFacebook className=' text-blue-500 mr-2' />
+                                <span className=' font-medium text-sm'>Facebook</span>
+                            </div>
+                            <div className=' flex flex-1 items-center rounded border p-1 cursor-pointer'>
+                                <FcGoogle className=' text-blue-500 mr-2' />
+                                <span className=' font-medium text-sm'>Google</span>
+                            </div>
                         </div>
-                        <div className=' w-full flex justify-center mt-2 sm:mt-5'>
-                            <button type='submit' className=' w-full text-white font-semibold px-10 py-2 bg-blue-600 hover:bg-blue-700 rounded '>Register</button>
+                        <div className=' my-5'>
+
+                            <p className=' text-center font-medium text-sm text-gray-600'>Already have an account?
+                                <Link href="/admin/login">
+                                    <a>
+                                        <span className=' text-blue-600 font-medium ml-1'>Sign In</span>
+                                    </a>
+                                </Link>
+                            </p>
                         </div>
                     </form>
                 </div>

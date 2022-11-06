@@ -7,6 +7,12 @@ import { adminLoginSuccess, loading, adminLoginFailure } from "../../Redux/Admin
 import { useDispatch } from "react-redux"
 import { useRouter } from 'next/router';
 import { useCookies } from "react-cookie"
+import { MdEmail } from "react-icons/md"
+import { RiLockPasswordFill } from 'react-icons/ri';
+import { AiFillFacebook } from 'react-icons/ai';
+import { FcGoogle } from "react-icons/fc"
+import Link from 'next/link';
+
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -42,22 +48,49 @@ function Login() {
     }
 
     return (
-        <div className=' bg-gray-100 h-screen w-full flex justify-center relative px-5'>
-            <div className=' w-full sm:w-[450px] mt-40'>
-                <div className=' w-full sm:w-[450px] bg-white rounded-lg py-5 shadow shadow-gray-200'>
-                    <h2 className=' text-center text-lg sm:text-2xl pt-5 font-semibold'>Admin Login</h2>
-
-                    <form className=' w-full py-5 px-5 sm:px-10' onSubmit={LoginFunc}>
-                        <div className=' w-full'>
-                            <label htmlFor="" className=' text-sm sm:text-base font-medium'>Email</label>
-                            <input onChange={(e) => { setEmail(e.target.value) }} value={email} type="email" placeholder='Email' required={true} className='inputFild focus:outline-none' />
+        <div className=' bg-gray-100 h-screen w-full relative px-5'>
+            <div className=' w-full pt-40 flex justify-center'>
+                <div className=' w-full sm:w-[350px] p-5 rounded-md bg-white shadow'>
+                    <h2 className=' text-lg font-semibold mb-2'>Log In</h2>
+                    <form className=' w-full' onSubmit={LoginFunc}>
+                        <div className=' w-full relative'>
+                            <MdEmail className=' absolute top-3 left-2 text-sm text-gray-500' />
+                            <input onChange={(e) => { setEmail(e.target.value) }} value={email} type="email" placeholder='Email' required={true} className=' w-full p-2 rounded focus:outline-none border pl-8 placeholder:text-sm placeholder:font-medium' />
                         </div>
-                        <div className=' w-full'>
-                            <label htmlFor="" className=' text-sm sm:text-base font-medium'>Password</label>
-                            <input onChange={(e) => { setPassword(e.target.value) }} value={password} type="password" placeholder='Password' required={true} className='inputFild focus:outline-none' />
+                        <div className=' w-full relative mt-3'>
+                            <RiLockPasswordFill className=' absolute top-3 left-2 text-sm text-gray-500' />
+                            <input onChange={(e) => { setPassword(e.target.value) }} value={password} type="password" placeholder='Password' required={true} className=' w-full p-2 rounded focus:outline-none border pl-8 placeholder:text-sm placeholder:font-medium' />
+                        </div>
+                        <div className=' flex justify-between mt-3'>
+                            <div className=' flex '>
+                                <input type="checkbox" className=' mr-1' />
+                                <span className=' text-sm font-medium text-gray-500'>Remember me</span>
+                            </div>
+                            <p className=' text-sm text-blue-600 font-medium'>Forget Password</p>
                         </div>
                         <div className=' w-full flex justify-center mt-2 sm:mt-5'>
-                            <button type='submit' className=' w-full text-white font-semibold px-10 py-2 bg-blue-600 hover:bg-blue-700 rounded '>Login</button>
+                            <button type='submit' className=' w-full text-white font-semibold py-1 bg-blue-600 hover:bg-blue-700 rounded '>Log In</button>
+                        </div>
+                        <p className=' text-sm text-center mb-2 mt-4 text-gray-500'>or Login with</p>
+                        <div className=' flex items-center gap-2 mt-4'>
+                            <div className=' flex flex-1 items-center rounded border p-1 cursor-pointer'>
+                                <AiFillFacebook className=' text-blue-500 mr-2' />
+                                <span className=' font-medium text-sm'>Facebook</span>
+                            </div>
+                            <div className=' flex flex-1 items-center rounded border p-1 cursor-pointer'>
+                                <FcGoogle className=' text-blue-500 mr-2' />
+                                <span className=' font-medium text-sm'>Google</span>
+                            </div>
+                        </div>
+                        <div className=' my-5'>
+
+                            <p className=' text-center font-medium text-sm text-gray-600'>Don't have an account?
+                                <Link href="/admin/register">
+                                    <a>
+                                        <span className=' text-blue-600 font-medium ml-1'>Sign Up</span>
+                                    </a>
+                                </Link>
+                            </p>
                         </div>
                     </form>
                 </div>
